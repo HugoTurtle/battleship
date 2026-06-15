@@ -4,7 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
+    "test:watch": "jest --watch",
     "start": "webpack serve --open --config webpack.dev.js",
     "build": "webpack --config webpack.prod.js",
     "lint": "eslint src",
@@ -23,6 +24,7 @@
     "globals": "^16.3.0",
     "html-loader": "^5.1.0",
     "html-webpack-plugin": "^5.6.4",
+    "jest": "^30.4.2",
     "prettier": "^3.6.2",
     "style-loader": "^4.0.0",
     "webpack": "^5.101.3",
