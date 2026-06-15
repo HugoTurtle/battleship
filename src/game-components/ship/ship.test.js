@@ -10,3 +10,9 @@ test("ship can be hit", () => {
     ship.hit();
     expect(ship.hits).toBe(1);
 })
+test("ship is sunk when hits equal length", () => {
+    const ship = new Ship(2);
+    ship.hit();
+    ship.hit();
+    expect(ship.isSunk()).toBeTruthy();
+})
