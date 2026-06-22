@@ -40,5 +40,17 @@ describe("Gameboard Class", () => {
         expect(gameboard.grid[row][col]).toBe(ship);
       });
     });
+    test("Throws an error for out of bound ships", () => {
+      const ship = new Ship(5);
+      const gameboard = new Gameboard();
+
+      expect(() => {
+        gameboard.placeShipHorizontally(ship, [10, 10]);
+      }).toThrow("Ship is out of bounds");
+
+      expect(() => {
+        gameboard.placeShipVertically(ship, [6, 6]);
+      }).toThrow("Ship is out of bounds");
+    });
   });
 });
