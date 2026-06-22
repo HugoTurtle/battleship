@@ -10,4 +10,11 @@ export class Gameboard {
             this.grid[x++][y] = ship;
         }
     }
+    placeShipHorizontally(ship, coordinate) {
+        let [x,y] = coordinate;
+        
+        for(let i = 0; i < ship.length; i++) {
+            this.grid[x][y++] = ship;
+        }
+    }
 }
