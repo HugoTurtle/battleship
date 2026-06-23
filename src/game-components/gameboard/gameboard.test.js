@@ -52,4 +52,17 @@ describe("Gameboard Class", () => {
       }).toThrow("Overlapping ships are not allowed");
     });
   });
+  test("Gameboard can receive attacks", () => {
+    const shipOne = new Ship(2);
+    const shipTwo = new Ship(3);
+    const shipThree = new Ship(3);
+    const gameboard = new Gameboard();
+
+    gameboard.placeShip(shipOne, [0, 0], "vertically");
+    gameboard.placeShip(shipTwo, [3, 2], "horizontally");
+    gameboard.placeShip(shipThree, [4, 5], "vertically");
+
+    expect(gameboard.receiveAttack([9, 9])).toBeFalsy();
+    expect(gameboard.receiveAttack([3, 4])).toBeTruthy();
+  });
 });

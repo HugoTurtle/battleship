@@ -1,6 +1,7 @@
 export class Gameboard {
   constructor() {
     this.grid = Array.from({ length: 10 }, () => Array(10).fill(0));
+    this.missedAttacks = new Set();
   }
 
   placeShip(ship, coordinate, direction) {
@@ -47,5 +48,15 @@ export class Gameboard {
         }
       }
     }
+  }
+  receiveAttack([row, column]) {
+    let target = this.grid[row][column];
+
+    if (target === 0) {
+      this.missedAttacks.add(target);
+      return false;
+    }
+    target.hit();
+    return true;
   }
 }
