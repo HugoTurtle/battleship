@@ -4,6 +4,9 @@ export class Gameboard {
   }
 
   placeShip(ship, coordinate, direction) {
+    if (this.isOverlapping(ship, coordinate, direction)) {
+      throw new Error("Overlapping ships are not allowed");
+    }
     direction === "vertically"
       ? this.placeShipVertically(ship, coordinate)
       : this.placeShipHorizontally(ship, coordinate);
@@ -28,6 +31,21 @@ export class Gameboard {
 
     for (let i = 0; i < ship.length; i++) {
       this.grid[x][y++] = ship;
+    }
+  }
+  isOverlapping(ship, [x, y], direction) {
+    if (direction === "vertically") {
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x++][y] !== 0) {
+          return true;
+        }
+      }
+    } else if (direction === "horizontally") {
+      for (let i = 0; i < ship.length; i++) {
+        if (this.grid[x][y++] !== 0) {
+          return true;
+        }
+      }
     }
   }
 }

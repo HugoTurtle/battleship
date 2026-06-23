@@ -41,5 +41,15 @@ describe("Gameboard Class", () => {
         gameboard.placeShipVertically(ship, [6, 6]);
       }).toThrow("Ship is out of bounds");
     });
+    test("Throws an error for overlapping ships", () => {
+      const shipOne = new Ship(5);
+      const shipTwo = new Ship(3);
+      const gameboard = new Gameboard();
+
+      expect(() => {
+        gameboard.placeShip(shipOne, [0, 0], "vertically");
+        gameboard.placeShip(shipTwo, [0, 0], "horizontally");
+      }).toThrow("Overlapping ships are not allowed");
+    });
   });
 });
