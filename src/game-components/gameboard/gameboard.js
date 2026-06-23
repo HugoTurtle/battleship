@@ -3,6 +3,11 @@ export class Gameboard {
     this.grid = Array.from({ length: 10 }, () => Array(10).fill(0));
   }
 
+  placeShip(ship, coordinate, direction) {
+    direction === "vertically"
+      ? this.placeShipVertically(ship, coordinate)
+      : this.placeShipHorizontally(ship, coordinate);
+  }
   placeShipVertically(ship, coordinate) {
     let [x, y] = coordinate;
 
