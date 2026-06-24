@@ -5,9 +5,14 @@ export class Gameboard {
   }
 
   placeShip(ship, coordinate, direction) {
+    if (this.outOfBounds(coordinate, ship)) {
+      throw new RangeError("Ship is out of bounds");
+    }
+
     if (this.isOverlapping(ship, coordinate, direction)) {
       throw new Error("Overlapping ships are not allowed");
     }
+
     direction === "vertically"
       ? this.placeShipVertically(ship, coordinate)
       : this.placeShipHorizontally(ship, coordinate);
@@ -15,20 +20,12 @@ export class Gameboard {
   placeShipVertically(ship, coordinate) {
     let [x, y] = coordinate;
 
-    if (x + ship.length - 1 > 9) {
-      throw new RangeError("Ship is out of bounds");
-    }
-
     for (let i = 0; i < ship.length; i++) {
       this.grid[x++][y] = ship;
     }
   }
   placeShipHorizontally(ship, coordinate) {
     let [x, y] = coordinate;
-
-    if (y + ship.length - 1 > 9) {
-      throw new RangeError("Ship is out of bounds");
-    }
 
     for (let i = 0; i < ship.length; i++) {
       this.grid[x][y++] = ship;
@@ -58,5 +55,10 @@ export class Gameboard {
     }
     target.hit();
     return true;
+  }
+  outOfBounds([row, column], ship) {
+    if (row + ship.length - 1 > 9 || row + column.length - 1 > 9) {
+      return true;
+    }
   }
 }

@@ -34,11 +34,11 @@ describe("Gameboard Class", () => {
       const gameboard = new Gameboard();
 
       expect(() => {
-        gameboard.placeShipHorizontally(ship, [10, 10]);
+        gameboard.placeShip(ship, [10, 10], "horizontally");
       }).toThrow("Ship is out of bounds");
 
       expect(() => {
-        gameboard.placeShipVertically(ship, [6, 6]);
+        gameboard.placeShip(ship, [6, 6], "vertically");
       }).toThrow("Ship is out of bounds");
     });
     test("Throws an error for overlapping ships", () => {
