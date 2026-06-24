@@ -2,6 +2,7 @@ export class Gameboard {
   constructor() {
     this.grid = Array.from({ length: 10 }, () => Array(10).fill(0));
     this.missedAttacks = new Set();
+    this.allShips = new Array();
   }
 
   placeShip(ship, coordinate, direction) {
@@ -13,9 +14,19 @@ export class Gameboard {
       throw new Error("Overlapping ships are not allowed");
     }
 
+    this.allShips.push(ship);
+
     direction === "vertically"
       ? this.placeShipVertically(ship, coordinate)
       : this.placeShipHorizontally(ship, coordinate);
+  }
+  areAllShipsSunk() {
+    for (const ship of this.allShips) {
+      if (!ship.isSunk()) {
+        return false;
+      }
+    }
+    return true;
   }
   placeShipVertically(ship, coordinate) {
     let [x, y] = coordinate;

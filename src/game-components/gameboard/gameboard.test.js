@@ -65,4 +65,23 @@ describe("Gameboard Class", () => {
     expect(gameboard.receiveAttack([9, 9])).toBeFalsy();
     expect(gameboard.receiveAttack([3, 4])).toBeTruthy();
   });
+  test("Gameboard can report if all ships are sunk", () => {
+    const shipOne = new Ship(2);
+    const shipTwo = new Ship(2);
+    const gameboard = new Gameboard();
+
+    gameboard.placeShip(shipOne, [0, 0], "vertically");
+    gameboard.placeShip(shipTwo, [0, 1], "vertically");
+
+    expect(gameboard.areAllShipsSunk()).toBe(false);
+
+    //Sink ships
+    gameboard.receiveAttack([0, 0]);
+    gameboard.receiveAttack([1, 0]);
+
+    gameboard.receiveAttack([0, 1]);
+    gameboard.receiveAttack([1, 1]);
+
+    expect(gameboard.areAllShipsSunk()).toBe(true);
+  });
 });
